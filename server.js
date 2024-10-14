@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Define a folder path where files will be saved
-const saveDirectory = path.join(__dirname, 'dist/static/files')
+const saveDirectory = path.join(__dirname, 'dist/files')
 
 // Ensure the save directory exists
 if (!fs.existsSync(saveDirectory)) {
@@ -30,14 +30,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-app.use(express.static(path.join(__dirname, 'dist/static')))
+app.use(express.static(path.join(__dirname, 'dist/files')))
 app.use(express.static(path.join(__dirname, 'dist/client')))
 
 app.all('/', (req, res) => {
   res.sendFile('index.html')
 })
 
-// GET request - Display a list of files in the server directory
+// Display a list of files in the server directory
 app.get('/files', (req, res) => {
   fs.readdir(saveDirectory, (err, files) => {
     if (err) {
@@ -47,7 +47,7 @@ app.get('/files', (req, res) => {
   })
 })
 
-// POST request - Save content to a file in the server path
+// Save content to a file in the server path
 app.post('/files', (req, res) => {
   const { fileName, content } = req.body
 
@@ -80,5 +80,6 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${port}`)
 })
 
-const dbQuery = require('./service/index.js')
-dbQuery()
+// Start DB connection
+const { testDb } = require('./service/index.js')
+testDb()

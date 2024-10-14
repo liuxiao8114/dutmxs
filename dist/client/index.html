@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Manager</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>File Manager</h1>
+
+        <!-- Form to create a new file -->
+        <h2>Create a New File</h2>
+        <form id="createFileForm">
+            <label for="fileName">File Name:</label>
+            <input type="text" id="fileName" name="fileName" required>
+
+            <label for="content">File Content:</label>
+            <textarea id="content" name="content" rows="4" required></textarea>
+
+            <button type="submit">Create File</button>
+        </form>
+
+        <h2>Upload a File</h2>
+        <!-- Drag-and-Drop Zone for File Upload -->
+        <div id="dropZone">
+            <p>Drag & Drop a file here or click to upload</p>
+            <input type="file" id="fileInput" style="display: none;">
+        </div>
+
+        <!-- Button to get the list of files -->
+        <h2>Get List of Files</h2>
+        <button id="getFilesButton">Get Files</button>
+        <!-- Display the list of files -->
+        <div id="fileList"></div>
+    </div>
+</body>
+</html>

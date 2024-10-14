@@ -64,7 +64,6 @@ typings/
 .DS_Store
 
 node_modules
-dist
 out
 *a.out
 

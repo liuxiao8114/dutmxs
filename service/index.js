@@ -1,23 +1,31 @@
-const mysql = require('mysql')
+const mysql = require('mysql2/promise')
 
-module.exports = function() {
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'x',
-    password: 'y',
+async function testDb() {
+  const connection = await mysql.createConnection({
+    host: '192.168.64.1',
+    user: '',
+    password: '',
     database: 'world',
   })
 
-  connection.connect()
+  try {
+    const [ results, fields ] = await connection.query(
+      `select * from city`
+    )
 
-  connection.query('seelct * from city', (err, results, fields) => {
-    if(err)
-      throw err
-    
-    console.log(results[0].solution)
-    console.log(results[1].solution)
-    console.log(results[2].solution)
+    console.log(results)
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+function createPool() {
+  return mysql.createProol({
+    host: 'localhost'
   })
+}
 
-  connection.end()
+module.exports = {
+  testDb,
+  createPool
 }
